@@ -101,16 +101,23 @@ class CaptureManager(object):
 
 cameraCapture = cv2.VideoCapture(0)
 ret = True
-a = CaptureManager(1)
-print(a.isWritingImage)
+# a = CaptureManager(1)
+# print(a.isWritingImage)
+cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+# cascade=cv2.CascadeClassifier()
 while ret:
     ret, frame = cameraCapture.read()
     # frame=cv2.flip(frame,0)#上下翻转
     frame = cv2.flip(frame, 1)  # 左右翻转
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    face = cascade.detectMultiScale(gray, 1.3, 5)
+    for (x, y, w, h) in face:
+        frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    
     cv2.imshow('My Camera', frame)
     k = cv2.waitKey(1) & 0xff
     if k == 27:
         break
 cameraCapture.release()
-a = bin
 cv2.destroyAllWindows()
