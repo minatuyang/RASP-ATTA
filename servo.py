@@ -62,15 +62,20 @@ class ServoControl(object):
     def changeAngle(self, value):
         if (value > 180 or value < 0):
             raise Exception("Invalid number!", OverflowError)
+            pass
         if value < self._minAngle or value > self._maxAngle:
+            pass  # angle=minAngle or angle= maxAngle
             raise Exception("Invalid number!", OverflowError)
+            pass
         if self.angle != value:
             self.angle = value
         cycle = 2.5+(1/18.0)*self.angle
         self.p.ChangeDutyCycle(cycle)
 
     def start(self):
-        pass  # if self.gpio is None
+        if self._gpio is None:
+            raise Exception("Invalid number!", OverflowError)
+            pass
         GPIO.setup(self._gpio, GPIO.OUT, initial=False)
         self.p = GPIO.PWM(self._gpio, self._freq)
         self.p.start(0)
@@ -80,12 +85,22 @@ if __name__ == "__main__":
     atexit.register(GPIO.cleanup)
     GPIO.cleanup
     GPIO.setmode(GPIO.BCM)
-    servo1 = ServoControl(minAngle=17.0, maxAngle=167.0)
-    print(servo1.minAngle)
-    print(servo1.maxAngle)
-    print(servo1.angle)
-    servo1.minAngle = 20
-    servo1.maxAngle = 170
-    print(servo1.maxAngle)
-    servo1.changeAngle(140.0)
-    print(servo1.angle)
+    # servo1 = ServoControl(minAngle=17.0, maxAngle=167.0)
+    # print(servo1.minAngle)
+    # print(servo1.maxAngle)
+    # print(servo1.angle)
+    # servo1.minAngle = 20
+    # servo1.maxAngle = 170
+    # print(servo1.maxAngle)
+    # servo1.changeAngle(140.0)
+    # print(servo1.angle)
+    servo1 = ServoControl(gpio=15)
+    servo1.start()
+    servo2 = ServoControl(gpio=18)
+    servo2.start()
+    while True:
+        servo1.changeAngle(90)
+        servo2.changeAngle(90)
+        time.sleep(1)
+        servo1.changeAngle(0)
+        servo2.changeAngle(0)
