@@ -13,11 +13,14 @@ class ServoControl(object):
         self._minAngle = minAngle
         if self._maxAngle > 180.0 or self._maxAngle < 0.0:
             raise Exception("Invalid maxAngle", OverflowError)
+            pass
         if self._minAngle > 180.0 or self._minAngle < 0.0:
             raise Exception("Invalid minAngle", OverflowError)
+            pass
         if self._minAngle > self._maxAngle:
             raise Exception(
-                "Invalid maxAngle: minAngle > maxAngle", OverflowError)
+                "Invalid angle: minAngle > maxAngle", OverflowError)
+            pass
 
     @property
     def gpio(self):
