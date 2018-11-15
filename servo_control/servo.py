@@ -71,6 +71,8 @@ class ServoControl(object):
             self.angle = value
         cycle = 2.5+(1/18.0)*self.angle
         self.p.ChangeDutyCycle(cycle)
+        time.sleep(0.02)
+        self.p.ChangeDutyCycle(0)
 
     def start(self):
         if self._gpio is None:
