@@ -88,16 +88,6 @@ if __name__ == "__main__":
     GPIO.setmode(GPIO.BCM)  # 设置GPIO的编号格式为BCM
     # BCM/BOARD
     # 可以在树莓派终端中输入gpio readall来查询GPIO的BCM编号
-
-    # servo1 = ServoControl(minAngle=17.0, maxAngle=167.0)
-    # print(servo1.minAngle)
-    # print(servo1.maxAngle)
-    # print(servo1.angle)
-    # servo1.minAngle = 20
-    # servo1.maxAngle = 170
-    # print(servo1.maxAngle)
-    # servo1.changeAngle(140.0)
-    # print(servo1.angle)
     servo1 = ServoControl(gpio=15)
     servo1.start()
     servo2 = ServoControl(gpio=18)
