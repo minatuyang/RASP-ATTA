@@ -20,7 +20,7 @@
 > 1.5ms------------90度；   7.5%  
 > 2.0ms-----------135度；   10.0%  
 > 2.5ms-----------180度；   12.5%  
-
+![image](https://github.com/minatuyang/RASP-ATTA/blob/servo_control/servo_control/GPIO%E8%A1%A8.JPG)
 
 ## 参考代码（部分来源网络）：  
 > ```C++   
